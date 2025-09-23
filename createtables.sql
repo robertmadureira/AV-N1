@@ -119,4 +119,18 @@ do $$ begin
 	        FOREIGN KEY(group_id) 
 	        REFERENCES "group"(id)   
 	);
+
+  CREATE TABLE ad_user (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        ad_group VARCHAR(255) NOT NULL,
+        is_linked BOOLEAN NOT NULL DEFAULT FALSE,
+        user_id INT,
+        creation_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        modification_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        
+        CONSTRAINT fk_user_ad
+            FOREIGN KEY (user_id)
+            REFERENCES "user"(id)
+    );
 end $$;
