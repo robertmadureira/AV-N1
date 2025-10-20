@@ -135,7 +135,7 @@ BEGIN
         SELECT 1
         FROM user_group ug
         JOIN "group" g ON ug.group_id = g.id
-        WHERE ug.user_id = p_user_id AND g.name = 'Global Administrators'
+        WHERE ug.user_id = p_user_id AND g.name IN = ('Administrador','Global Administrators');
     ) INTO is_admin;
 
     IF is_admin THEN
@@ -281,7 +281,7 @@ SELECT
         WHEN u.last_access >= (NOW() - INTERVAL '2 days') THEN 'Alto'
         WHEN u.last_access >= (NOW() - INTERVAL '7 days') THEN 'Médio'
         WHEN u.last_access >= (NOW() - INTERVAL '30 days') THEN 'Baixo'
-        ELSE 'Antigo' 
+        ELSE 'Baixo' 
     END AS nivel_engajamento
 FROM
     "user" u
@@ -342,4 +342,5 @@ BEGIN
     RAISE NOTICE 'Procedimento concluído com sucesso!';
 
 END;
+
 $$;
